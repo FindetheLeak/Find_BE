@@ -6,13 +6,20 @@ const pool = require('../config/database');
 
 // POST /api/user/onboard
 router.post('/onboard', async (req, res) => {
-    // isLoggedIn 미들웨어는 server.js에서 적용
-    const { username, birthday, phone_number, github_id } = req.body;
-    const userId = req.user.user_id;
 
-    if (!username) {
-        return res.status(400).json({ message: '닉네임은 필수입니다.' });
+    // isLoggedIn 미들웨어는 server.js에서 적용
+    // 현재 세션은 actor 기반 principal: { actor_id, actor_type, user?, org? }
+    const { username } = req.body;
+    const birthday = (req.body?.birthday ?? null) || null;      // '' -> null
+    const phone_number = (req.body?.phone_number ?? null) || null;  // '' -> null
+    const github_id = (req.body?.github_id ?? null) || null;     // '' -> null
+    const userId = req.user?.user?.user_id; // ✅ actor 기반에서 USER의 PK
+
+
+    if (req.user?.actor_type !== 'USER' || !userId) {
+        return res.status(400).json({ message: '개인(일반인) 계정에서만 온보딩 가능합니다.' });
     }
+
 
     try {
         // 닉네임 중복 확인

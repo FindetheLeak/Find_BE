@@ -4,11 +4,21 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
+
+/* 2025-09-24 00:42 변경사항 
+
+*/
+
+
+
+
+
+
 // 설정 파일 로드
 require('./config/passport')(passport);
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
-
+const orgRoutes = require('./routes/org');
 const app = express();
 
 // 미들웨어 설정
@@ -50,9 +60,9 @@ app.get('/profile', isLoggedIn, (req, res) => {
 // 분리된 라우터 마운트
 app.use('/auth', authRoutes);
 app.use('/api/user', isLoggedIn, userRoutes); // /api/user 경로의 모든 라우트에 로그인 확인 적용
-
+app.use('/api/org',  isLoggedIn, orgRoutes);
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
