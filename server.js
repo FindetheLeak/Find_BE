@@ -3,23 +3,22 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
-
-
-/* 2025-09-24 00:42 변경사항 
-
-*/
-
-
-
-
-
+const cors = require('cors');
 
 // 설정 파일 로드
 require('./config/passport')(passport);
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const orgRoutes = require('./routes/org');
+const publicRoutes = require('./routes/public');
 const app = express();
+
+// CORS 설정
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001', // 허용할 프론트엔드 주소
+    credentials: true, // 쿠키를 포함한 요청 허용
+};
+app.use(cors(corsOptions));
 
 // 미들웨어 설정
 app.use(express.json());
@@ -58,6 +57,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
 });
 
 // 분리된 라우터 마운트
+app.use('/api', publicRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/user', isLoggedIn, userRoutes); // /api/user 경로의 모든 라우트에 로그인 확인 적용
 app.use('/api/org',  isLoggedIn, orgRoutes);
