@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-black/10 dark:border-white/10 px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-black dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-lg font-bold">Bug Bounty Platform</h2>
+</div>
+<nav class="flex items-center gap-9">
+<a class="text-sm font-medium text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white" href="#">Dashboard</a>
+<a class="text-sm font-medium text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white" href="#">Programs</a>
+<a class="text-sm font-medium text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white" href="#">Docs</a>
+<a class="text-sm font-medium text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white" href="#">Resources</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-black/50 dark:text-white/50"> search </span>
+<input class="form-input w-full rounded-lg border-none bg-black/5 dark:bg-white/5 py-2 pl-10 pr-4 text-sm text-black dark:text-white placeholder-black/50 dark:placeholder-white/50 focus:ring-2 focus:ring-primary" placeholder="Search" value=""/>
+</div>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/5 dark:bg-white/5 text-black/60 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 hover:text-black dark:hover:text-white">
+<span class="material-symbols-outlined text-xl"> notifications </span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBeKvf4W4sxJtyDTB7_AnMlq0WEpYafy2eolnCYco7w9nJ4NeoeByC1XOhXByGp4TVuO4bjsHZ5oqwJDjiliTS01-w089q6qcD33DtnRCqxHgmObUQDel4umj5Aosv_1ABaF3SE5RMtQklgMW1aoxzEzaU-xqkyJC9F-2AulN26Zsj_gs1w8kIfdmI7KwcZdkEQKLU1hsq7xh1B42kkdibSfKfhrwyosjltyabFGC2zzXCn-X9DMPBuYvvMoBFWGsc8dApDV1LRIJep");'></div>
+</div>
+</header>
+<main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-4xl">
+<div class="mb-8 flex items-center justify-between">
+<h1 class="text-3xl font-bold text-black dark:text-white">Tech Solutions Inc.</h1>
+</div>
+<div class="mb-8 border-b border-black/10 dark:border-white/10">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a class="border-b-2 border-primary px-1 pb-4 text-sm font-bold text-primary" href="#">Overview</a>
+<a class="border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-black/60 dark:text-white/60 hover:border-black/20 hover:text-black dark:hover:border-white/20 dark:hover:text-white" href="#">Rules</a>
+<a class="border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-black/60 dark:text-white/60 hover:border-black/20 hover:text-black dark:hover:border-white/20 dark:hover:text-white" href="#">Hall of Fame</a>
+<a class="border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-black/60 dark:text-white/60 hover:border-black/20 hover:text-black dark:hover:border-white/20 dark:hover:text-white" href="#">Q&amp;A</a>
+</nav>
+</div>
+<div class="space-y-12">
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">About Tech Solutions Inc.</h2>
+<p class="mt-4 text-base text-black/80 dark:text-white/80">
+              Tech Solutions Inc. is a leading technology company specializing in cloud computing, software development, and IT services. We are committed to innovation and security, and we value the contributions of the security community in helping us identify and address potential vulnerabilities. Our bug bounty program is designed to reward researchers for their efforts in improving the security of our products and services.
+            </p>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Bug Bounty Program Details</h2>
+<div class="mt-6 divide-y divide-black/10 dark:divide-white/10 border-t border-black/10 dark:border-white/10">
+<div class="grid grid-cols-1 gap-4 py-6 md:grid-cols-4">
+<p class="text-sm font-medium text-black/60 dark:text-white/60">Scope</p>
+<p class="text-sm text-black dark:text-white md:col-span-3">
+                  Our bug bounty program covers a wide range of our products and services, including our cloud platform, web applications, and mobile apps. For a detailed list of in-scope and out-of-scope assets, please refer to the 'Rules' tab.
+                </p>
+</div>
+<div class="grid grid-cols-1 gap-4 py-6 md:grid-cols-4">
+<p class="text-sm font-medium text-black/60 dark:text-white/60">Rewards</p>
+<p class="text-sm text-black dark:text-white md:col-span-3">
+                  We offer competitive rewards based on the severity of the reported vulnerability. Rewards range from $500 to $10,000, with higher rewards for critical vulnerabilities. See the 'Rules' tab for a detailed breakdown of reward amounts.
+                </p>
+</div>
+<div class="grid grid-cols-1 gap-4 py-6 md:grid-cols-4">
+<p class="text-sm font-medium text-black/60 dark:text-white/60">Severity</p>
+<p class="text-sm text-black dark:text-white md:col-span-3">
+                  Vulnerabilities are classified into four severity levels: Critical, High, Medium, and Low. The severity level is determined based on the potential impact of the vulnerability and the likelihood of exploitation. See the 'Rules' tab for more information on severity classifications.
+                </p>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Announcements</h2>
+<div class="mt-6 flex flex-col gap-6 overflow-hidden rounded-lg bg-black/5 dark:bg-white/5 md:flex-row">
+<div class="flex flex-col gap-2 p-6 md:w-1/2">
+<h3 class="text-base font-bold text-black dark:text-white">Program Update: New Reward Structure</h3>
+<p class="text-sm text-black/60 dark:text-white/60">We've updated our reward structure to better reflect the value of high-impact vulnerabilities. Critical vulnerabilities now offer rewards up to $10,000.</p>
+</div>
+<div class="h-48 bg-cover bg-center md:h-auto md:w-1/2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLafbUGSualgskG56YkVQ47h1kVn_ltu0xVT2D5kIAXSSBWGRV4LzTCUeaFUtSWTbT2oDN14HAS31am2tvuhL47RGverNyircFCXEo7euyvHyC0cBIBOkK7OuZTMFAR7sStPTH0CLr1P6qohG43nJyfCoGaK5Tilh9vnQKBkkq3WljxHuBhg06gbeTbTlQwVKpB3ICHpyBcVAZTcYkD8chThnmQLjl_z74kFE_rkmlILYo406iRNB5y5ajW4HdRaKweAov-XzDcvbx");'></div>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Target</h2>
+<p class="mt-4 text-base text-black/80 dark:text-white/80">Our bug bounty program focuses on the following areas:</p>
+<div class="mt-4 space-y-4">
+<label class="flex items-center gap-x-3">
+<input checked="" class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">Cloud Platform: Including our core services and APIs.</span>
+</label>
+<label class="flex items-center gap-x-3">
+<input checked="" class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">Web Applications: Our main website and related web apps.</span>
+</label>
+<label class="flex items-center gap-x-3">
+<input checked="" class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">Mobile Applications: Our iOS and Android apps.</span>
+</label>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Restrictions</h2>
+<p class="mt-4 text-base text-black/80 dark:text-white/80">Please note the following restrictions:</p>
+<div class="mt-4 space-y-4">
+<label class="flex items-center gap-x-3">
+<input class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">No testing against user accounts without explicit permission.</span>
+</label>
+<label class="flex items-center gap-x-3">
+<input class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">No denial of service (DoS) attacks.</span>
+</label>
+<label class="flex items-center gap-x-3">
+<input class="h-5 w-5 rounded border-black/20 dark:border-white/20 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-base text-black dark:text-white">No social engineering or phishing attempts.</span>
+</label>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Hall of Fame</h2>
+<div class="mt-6 flow-root">
+<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+<div class="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
+<table class="min-w-full divide-y divide-black/10 dark:divide-white/10">
+<thead class="bg-black/5 dark:bg-white/5">
+<tr>
+<th class="px-4 py-3.5 text-left text-sm font-semibold text-black dark:text-white" scope="col">Rank</th>
+<th class="px-4 py-3.5 text-left text-sm font-semibold text-black dark:text-white" scope="col">Researcher</th>
+<th class="px-4 py-3.5 text-left text-sm font-semibold text-black dark:text-white" scope="col">Submissions</th>
+<th class="px-4 py-3.5 text-left text-sm font-semibold text-black dark:text-white" scope="col">Impact</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-black/10 dark:divide-white/10 bg-background-light dark:bg-background-dark">
+<tr>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">1</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium text-black dark:text-white">Alex R.</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">15</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">High</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">2</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium text-black dark:text-white">Jordan S.</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">12</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">Medium</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">3</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium text-black dark:text-white">Taylor L.</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">10</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">High</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">4</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium text-black dark:text-white">Casey M.</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">8</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">Medium</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">5</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium text-black dark:text-white">Riley P.</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">6</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-black/60 dark:text-white/60">Low</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold text-black dark:text-white">Q&amp;A</h2>
+<div class="mt-6 space-y-8">
+<div class="flex items-start gap-4">
+<div class="size-10 shrink-0 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdqs7A-VGZvOPzpLD2Ix-dH5fdi3lkAj3w0UEXlKJGclEL43MFPaZJDA1UZD3et47GKprOjBECreJm4g6nTcyo6hkj4AbsfLiGpGBCcE2_glJ12oaM5IRMyZZ0k7W3ZFVON2jXArV2JgGga8SA047YuVxGrYd4NojpI0edYtRHZJSU0-O1NkIHB2GuXyBCNEexnJyhbTqYJwqzuHOOM33t-BwbRf6JOey41-uOfUSZTVxylNKEJq3niHYmY6WbX3zfvFFmzYTa9OHZ");'></div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="text-sm font-bold text-black dark:text-white">Jamie K.</p>
+<p class="text-sm text-black/60 dark:text-white/60">2 weeks ago</p>
+</div>
+<p class="mt-1 text-sm text-black dark:text-white">What are the most common types of vulnerabilities you're looking for?</p>
+</div>
+</div>
+<div class="flex items-start gap-4 pl-14">
+<div class="size-10 shrink-0 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqcOKRkE4OAYHcH8wTkkJwR1whCd4M5YkO9xSbINVWFAVyVAr59WY3wopsdrimQ9yyNxelvaT4k31JHuL8smCHAuyIv1zpPDXW07jtLpyPM2aqTJUGJiN24cfMd-1Qxrfc8bcQm24PcjSIs28SYUJbL7nNQxmcjOxZzuaOwzer8NvjrciSbCULNafuMb5Wf8l53ZcPPDgkYYNyuvvKodBrvuUHVMijW4dlyTv0Pxw7dJZG6c_S-Swvy-2e18w2Cr5Wp-zhGDrPMAVF");'></div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="text-sm font-bold text-black dark:text-white">Tech Solutions Inc.</p>
+<p class="text-sm text-black/60 dark:text-white/60">1 week ago</p>
+</div>
+<p class="mt-1 text-sm text-black dark:text-white">
+                    We are particularly interested in vulnerabilities related to authentication, authorization, and data security. Please refer to the 'Rules' tab for a more detailed list of in-scope vulnerabilities.
+                  </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+
+</body></html>

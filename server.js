@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const orgRoutes = require('./routes/org');
 const publicRoutes = require('./routes/public');
+const searchRoutes = require('./routes/search.js');
 const app = express();
 
 // CORS 설정
@@ -58,6 +59,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
 
 // 분리된 라우터 마운트
 app.use('/api', publicRoutes);
+app.use('/api', searchRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/user', isLoggedIn, userRoutes); // /api/user 경로의 모든 라우트에 로그인 확인 적용
 app.use('/api/org',  isLoggedIn, orgRoutes);
