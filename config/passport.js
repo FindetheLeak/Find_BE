@@ -40,13 +40,6 @@ async function fetchGithubPrimaryEmail(accessToken) {
   return { email: emails[0].email, verified: !!emails[0].verified };
 }
 
-
-function isAdminAllowed(email) {
-  const allow = (process.env.ADMIN_EMAILS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-  return allow.includes((email || '').toLowerCase());
-}
-
-
 async function findOrCreatePrincipal(req, accessToken, refreshToken, profile, done) {
   const provider = profile.provider.toUpperCase();
   const providerUserId = profile.id;
@@ -136,9 +129,6 @@ async function findOrCreatePrincipal(req, accessToken, refreshToken, profile, do
       actorId = ar.insertId;
 
     } else if (desiredRole === 'ADMIN') {
-      if (!isAdminAllowed(email)) {
-        throw new Error('관리자 권한이 없습니다.'); // 보안: 화이트리스트 아니면 차단
-      }
       const [ar] = await conn.execute(
         'INSERT INTO actors (actor_type) VALUES (?)',
         ['ADMIN']

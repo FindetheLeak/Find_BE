@@ -12,6 +12,9 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <div id="loginStatusBox" class="alert alert-light border text-center mb-4">
+                    <span id="loginStatusText">로그인 상태 확인 중...</span>
+                </div>
                 <div class="card text-center">
                     <div class="card-header">
                         <h2>소셜 로그인</h2>
@@ -33,22 +36,1105 @@
                 </div>
 
 
-                <div class="card text-center">
+                <div class="card mt-4" id="org-mypage-card">
                     <div class="card-header">
-                        <h2>기능 테스트</h2>
+                        <h2>기업회원 마이페이지</h2>
                     </div>
-                    <div class="card-body">
-                        <p>바운티 프로그램 , 오픈소스 검색 테스트 페이지 이동</p>
-
-                        <div class="d-grid gap-2 mb-4">
-                            <a href="/UserSearchingHub/index.html" class="btn btn-primary btn-lg">이동</a>
+                    <div class="card-body text-start">
+                        <p class="small text-muted">
+                            기업 계정이 사용할 수 있는 테스트 기능 모음입니다.
+                        </p>
+                        <div class="border rounded p-3 mt-3" id="org-bug-bounty-test">
+                            <h5 class="mb-3">기능테스트 : 기업회원 전용 버그바운티 프로그램 등록 기능</h5>
+                            <p class="small text-muted mb-3">
+                                프로그램명과 내용을 입력하면 등록 시간이 기록된 버그바운티 프로그램이 생성됩니다.
+                            </p>
+                            <form id="bugBountyForm" class="mb-3">
+                                <div class="mb-3">
+                                    <label for="programName" class="form-label">프로그램명</label>
+                                    <input type="text" id="programName" class="form-control" placeholder="예) 내부 결제 시스템 점검" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="programDescription" class="form-label">프로그램 내용</label>
+                                    <textarea id="programDescription" class="form-control" rows="3" placeholder="수행 범위, 보상 정책 등 간단히 입력하세요." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">버그바운티 프로그램 등록</button>
+                            </form>
+                            <div id="bugBountyResult" class="small text-muted"></div>
                         </div>
+                    </div>
+                </div>
 
+                <div class="card mt-4" id="org-dashboard-test">
+                    <div class="card-header">
+                        <h2>기업별 대시보드 페이지 테스트</h2>
+                    </div>
+                    <div class="card-body text-start">
+                        <p class="small text-muted">
+                            현재 등록된 기업 목록을 조회한 뒤 기업을 선택하면 상세 정보와 입력 폼이 표시됩니다.
+                        </p>
+                        <div class="mb-3">
+                            <div class="list-group" id="orgDashboardList">
+                                <div class="list-group-item text-muted">등록된 기업을 불러오는 중입니다...</div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-3" id="orgDashboardDetail">
+                            <div id="orgDashboardDetailMessage" class="small text-muted">기업을 선택하면 상세 정보가 표시됩니다.</div>
+                            <div id="orgDashboardDetailFields" class="mt-3"></div>
+                            <fieldset id="orgDashboardFormFieldset" class="mt-3" disabled>
+                                <form id="orgDashboardForm">
+                                    <div class="row g-2">
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputProgramIntro" class="form-label small">프로그램 소개</label>
+                                            <input type="text" id="inputProgramIntro" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputBountyInfo" class="form-label small">포상금 정보</label>
+                                            <input type="text" id="inputBountyInfo" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputSeverityInfo" class="form-label small">심각도</label>
+                                            <input type="text" id="inputSeverityInfo" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputOrgNotice" class="form-label small">기업 공지사항</label>
+                                            <input type="text" id="inputOrgNotice" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputSubmissionTargets" class="form-label small">취약점 제보 대상</label>
+                                            <input type="text" id="inputSubmissionTargets" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputLimitations" class="form-label small">제약사항</label>
+                                            <input type="text" id="inputLimitations" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputHallOfFame" class="form-label small">사용자 기여도 순위(명예의전당)</label>
+                                            <input type="text" id="inputHallOfFame" class="form-control" maxlength="255">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="inputQABoard" class="form-label small">Q&A 게시판</label>
+                                            <input type="text" id="inputQABoard" class="form-control" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success w-100 mt-3">기업 대시보드 정보 저장</button>
+                                </form>
+                            </fieldset>
+                            <div id="orgDashboardFormMessage" class="small text-muted mt-2">
+                                기업 계정으로 로그인하고 본인 기업을 선택하면 내용을 수정할 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4" id="team-play-card">
+                    <div class="card-header">
+                        <h2>팀플레이</h2>
+                    </div>
+                    <div class="card-body text-start">
+                        <p class="small text-muted">
+                            버그바운티 대회 또는 협업을 위한 팀을 구성하고 참여를 테스트합니다. 일반 회원(actor_type=USER)만 팀을 생성/관리할 수 있습니다.
+                        </p>
+                        <div class="border rounded p-3" id="team-play-testing">
+                            <h5 class="mb-3">버그바운티 대회 또는 협력을 위한 팀 구성 테스트</h5>
+                            <div class="row g-3">
+                                <div class="col-12 col-lg-6">
+                                    <form id="teamForm">
+                                        <div class="mb-2 d-flex justify-content-between align-items-center">
+                                            <span class="fw-semibold">팀 정보</span>
+                                            <button type="button" id="teamFormResetButton" class="btn btn-sm btn-outline-secondary">새 팀 모드</button>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="teamNameInput" class="form-label small">팀명</label>
+                                            <input type="text" id="teamNameInput" class="form-control" maxlength="100" required placeholder="예) 레드헌터스">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="teamIntroInput" class="form-label small">팀 소개</label>
+                                            <textarea id="teamIntroInput" class="form-control" rows="3" maxlength="255" placeholder="팀의 목표나 역할을 간단히 적어주세요."></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary w-100" id="teamFormSubmitButton">팀 생성</button>
+                                        <div id="teamFormMessage" class="small text-muted mt-2">일반 회원만 팀을 생성할 수 있습니다.</div>
+                                    </form>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="mb-2 d-flex justify-content-between align-items-center">
+                                        <span class="fw-semibold">팀 목록</span>
+                                        <button type="button" id="teamListReloadButton" class="btn btn-sm btn-outline-secondary">새로고침</button>
+                                    </div>
+                                    <div id="teamList" style="background:#fff; color:#000; min-height:80px; padding:8px;">
+                                        팀 목록을 불러오는 중입니다...
+                                    </div>
+                                    <div class="border rounded p-3" id="teamDetailPanel">
+                                        <div id="teamDetailMessage" class="small text-muted">팀을 선택하면 상세 정보가 표시됩니다.</div>
+                                        <div id="teamDetailContent" class="mt-2"></div>
+                                        <div id="teamMemberList" class="mt-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4" id="bug-bounty-search">
+                    <div class="card-header">
+                        <h2>검색기능 테스트</h2>
+                    </div>
+                    <div class="card-body text-start">
+                        <p class="small text-muted mb-3">
+                            키워드를 입력해 등록된 버그바운티 프로그램명/내용에서 해당 텍스트가 포함된 항목을 조회합니다.
+                        </p>
+                        <form id="bugBountySearchForm" class="mb-3">
+                            <div class="input-group">
+                                <input type="text" id="bugBountySearchInput" class="form-control" placeholder="예) 결제, 내부" required>
+                                <button type="submit" class="btn btn-outline-primary">검색</button>
+                            </div>
+                        </form>
+                        <div id="bugBountySearchResult" class="small text-muted"></div>
+                    </div>
+                </div>
+
+                <div class="card mt-4" id="admin-notice-section">
+                    <div class="card-header">
+                        <h2>공지사항 등록 기능 테스트</h2>
+                    </div>
+                    <div class="card-body text-start">
+                        <p class="small text-muted mb-3">
+                            관리자 계정만 공지사항을 등록/수정/삭제할 수 있습니다. 일반 계정은 읽기 전용 안내만 표시됩니다.
+                        </p>
+                        <fieldset id="adminNoticeFieldset" disabled>
+                            <form id="adminNoticeForm" class="mb-3">
+                                <div class="mb-3">
+                                    <label for="adminNoticeTitle" class="form-label">공지 제목</label>
+                                    <input type="text" id="adminNoticeTitle" class="form-control" placeholder="예) 시스템 점검 안내" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adminNoticeContent" class="form-label">공지 내용</label>
+                                    <textarea id="adminNoticeContent" class="form-control" rows="3" placeholder="공지 상세 내용을 입력하세요." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-warning w-100">공지 등록</button>
+                            </form>
+                        </fieldset>
+                        <div id="adminNoticeMessage" class="small text-muted">관리자 로그인 시 공지사항을 관리할 수 있습니다.</div>
+                        <ul class="list-group mt-3" id="adminNoticeList"></ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+<script>
+        (function () {
+            const bugBountyForm = document.getElementById('bugBountyForm');
+            const bugBountyResult = document.getElementById('bugBountyResult');
+            const loginStatusBox = document.getElementById('loginStatusBox');
+            const loginStatusText = document.getElementById('loginStatusText');
+            const searchForm = document.getElementById('bugBountySearchForm');
+            const searchInput = document.getElementById('bugBountySearchInput');
+            const searchResultEl = document.getElementById('bugBountySearchResult');
+
+            const adminNoticeFieldset = document.getElementById('adminNoticeFieldset');
+            const adminNoticeForm = document.getElementById('adminNoticeForm');
+            const adminNoticeTitle = document.getElementById('adminNoticeTitle');
+            const adminNoticeContent = document.getElementById('adminNoticeContent');
+            const adminNoticeMessage = document.getElementById('adminNoticeMessage');
+            const adminNoticeList = document.getElementById('adminNoticeList');
+
+            const orgDashboardList = document.getElementById('orgDashboardList');
+            const orgDashboardDetailMessage = document.getElementById('orgDashboardDetailMessage');
+            const orgDashboardDetailFields = document.getElementById('orgDashboardDetailFields');
+            const orgDashboardFormFieldset = document.getElementById('orgDashboardFormFieldset');
+            const orgDashboardForm = document.getElementById('orgDashboardForm');
+            const orgDashboardFormMessage = document.getElementById('orgDashboardFormMessage');
+            const orgDashboardInputs = {
+                program_intro: document.getElementById('inputProgramIntro'),
+                bounty_info: document.getElementById('inputBountyInfo'),
+                severity_info: document.getElementById('inputSeverityInfo'),
+                org_notice: document.getElementById('inputOrgNotice'),
+                submission_targets: document.getElementById('inputSubmissionTargets'),
+                limitations: document.getElementById('inputLimitations'),
+                hall_of_fame: document.getElementById('inputHallOfFame'),
+                qa_board: document.getElementById('inputQABoard')
+            };
+            const teamForm = document.getElementById('teamForm');
+            const teamNameInput = document.getElementById('teamNameInput');
+            const teamIntroInput = document.getElementById('teamIntroInput');
+            const teamFormSubmitButton = document.getElementById('teamFormSubmitButton');
+            const teamFormMessage = document.getElementById('teamFormMessage');
+            const teamFormResetButton = document.getElementById('teamFormResetButton');
+            const teamListEl = document.getElementById('teamList');
+            const teamListReloadButton = document.getElementById('teamListReloadButton');
+            const teamDetailMessage = document.getElementById('teamDetailMessage');
+            const teamDetailContent = document.getElementById('teamDetailContent');
+            const teamMemberList = document.getElementById('teamMemberList');
+
+            const orgDashboardFieldConfigs = [
+                { key: 'program_intro', label: '프로그램 소개' },
+                { key: 'bounty_info', label: '포상금 정보' },
+                { key: 'severity_info', label: '심각도' },
+                { key: 'org_notice', label: '기업 공지사항' },
+                { key: 'submission_targets', label: '취약점 제보 대상' },
+                { key: 'limitations', label: '제약사항' },
+                { key: 'hall_of_fame', label: '사용자 기여도 순위(명예의전당)' },
+                { key: 'qa_board', label: 'Q&A 게시판' }
+            ];
+
+            const state = {
+                session: {
+                    actorType: null,
+                    orgId: null,
+                    isAdmin: false
+                },
+                adminNotices: {
+                    loading: false
+                },
+                orgDashboard: {
+                    list: [],
+                    selectedOrgId: null,
+                    detail: null
+                },
+                teamPlay: {
+                    teams: [],
+                    selectedTeamId: null,
+                    editingTeamId: null,
+                    detail: null,
+                    loading: false
+                }
+            };
+
+            const actorTypeLabel = (actorType) => {
+                switch (actorType) {
+                    case 'ORG':
+                        return '기업 회원';
+                    case 'USER':
+                        return '일반 회원';
+                    case 'ADMIN':
+                        return '관리자';
+                    default:
+                        return actorType || '알 수 없음';
+                }
+            };
+
+            const canEditSelectedOrg = () =>
+                state.session.actorType === 'ORG' &&
+                !!state.session.orgId &&
+                state.orgDashboard.selectedOrgId === state.session.orgId;
+
+            const canUseTeamPlay = () => state.session.actorType === 'USER';
+
+            function clearOrgDashboardFormValues() {
+                orgDashboardFieldConfigs.forEach(({ key }) => {
+                    if (orgDashboardInputs[key]) orgDashboardInputs[key].value = '';
+                });
+            }
+
+            function resetTeamFormFields() {
+                if (teamNameInput) teamNameInput.value = '';
+                if (teamIntroInput) teamIntroInput.value = '';
+            }
+
+            async function refreshSessionStatus() {
+                if (!loginStatusBox || !loginStatusText) return;
+                try {
+                    const response = await fetch('/api/session', { credentials: 'same-origin' });
+                    if (!response.ok) throw new Error('status fetch failed');
+                    const data = await response.json();
+
+                    if (data.logged_in) {
+                        const memberLabel = actorTypeLabel(data.actor_type);
+                        const displayName = data?.org?.org_name || data?.user?.username || '';
+                        const nameText = displayName ? ` (${displayName})` : '';
+
+                        loginStatusText.textContent = `로그인 상태: 로그인${nameText} · 회원 종류: ${memberLabel}`;
+                        loginStatusBox.classList.remove('alert-secondary', 'alert-warning');
+                        loginStatusBox.classList.add('alert-success');
+
+                        state.session.actorType = data.actor_type;
+                        state.session.orgId = data?.org?.org_id || null;
+                        state.session.isAdmin = data.actor_type === 'ADMIN';
+                    } else {
+                        loginStatusText.textContent = '로그인 상태: 미로그인';
+                        loginStatusBox.classList.remove('alert-success', 'alert-warning');
+                        loginStatusBox.classList.add('alert-secondary');
+
+                        state.session.actorType = null;
+                        state.session.orgId = null;
+                        state.session.isAdmin = false;
+                    }
+                } catch (error) {
+                    console.error(error);
+                    loginStatusText.textContent = '로그인 상태를 확인할 수 없습니다.';
+                    loginStatusBox.classList.remove('alert-success', 'alert-secondary');
+                    loginStatusBox.classList.add('alert-warning');
+
+                    state.session.actorType = null;
+                    state.session.orgId = null;
+                    state.session.isAdmin = false;
+                } finally {
+                    updateAdminNoticeAccessUI();
+                    updateOrgDashboardFormState();
+                    updateTeamPlayAccessUI();
+                }
+            }
+
+            function updateAdminNoticeAccessUI() {
+                if (!adminNoticeFieldset || !adminNoticeMessage) return;
+                if (state.session.isAdmin) {
+                    adminNoticeFieldset.disabled = false;
+                    adminNoticeMessage.textContent = '등록된 공지사항 목록입니다.';
+                    loadAdminNotices();
+                } else {
+                    adminNoticeFieldset.disabled = true;
+                    adminNoticeMessage.textContent = '관리자 로그인 시 공지사항 CRUD 기능을 사용할 수 있습니다.';
+                    if (adminNoticeList) adminNoticeList.innerHTML = '';
+                }
+            }
+
+            async function loadAdminNotices() {
+                if (!state.session.isAdmin || state.adminNotices.loading || !adminNoticeList) return;
+                state.adminNotices.loading = true;
+                adminNoticeMessage.textContent = '공지사항을 불러오는 중입니다...';
+                try {
+                    const response = await fetch('/api/admin/notices');
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '공지사항을 불러오지 못했습니다.');
+                    renderAdminNotices(Array.isArray(data.items) ? data.items : []);
+                } catch (error) {
+                    console.error(error);
+                    adminNoticeMessage.textContent = error.message || '공지사항을 불러오는 중 오류가 발생했습니다.';
+                    adminNoticeList.innerHTML = '';
+                } finally {
+                    state.adminNotices.loading = false;
+                }
+            }
+
+            function renderAdminNotices(items) {
+                adminNoticeList.innerHTML = '';
+                if (!items.length) {
+                    adminNoticeMessage.textContent = '등록된 공지사항이 없습니다.';
+                    return;
+                }
+
+                adminNoticeMessage.textContent = `총 ${items.length}건의 공지가 있습니다.`;
+                items.forEach((item) => {
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item';
+
+                    const titleEl = document.createElement('div');
+                    titleEl.className = 'fw-semibold';
+                    titleEl.textContent = item.title;
+
+                    const contentEl = document.createElement('div');
+                    contentEl.textContent = item.content;
+
+                    const createdAt = item.created_at ? new Date(item.created_at).toLocaleString('ko-KR') : '등록 시간 확인 불가';
+                    const updatedAt = item.updated_at ? new Date(item.updated_at).toLocaleString('ko-KR') : null;
+                    const metaText = updatedAt && item.updated_at !== item.created_at
+                        ? `등록: ${createdAt} · 수정: ${updatedAt}`
+                        : `등록 시간: ${createdAt}`;
+
+                    const metaEl = document.createElement('div');
+                    metaEl.className = 'text-muted small';
+                    metaEl.textContent = metaText;
+
+                    li.appendChild(titleEl);
+                    li.appendChild(contentEl);
+                    li.appendChild(metaEl);
+
+                    if (state.session.isAdmin) {
+                        const actionWrap = document.createElement('div');
+                        actionWrap.className = 'mt-2 d-flex gap-2';
+
+                        const editBtn = document.createElement('button');
+                        editBtn.type = 'button';
+                        editBtn.className = 'btn btn-sm btn-outline-secondary';
+                        editBtn.textContent = '수정';
+                        editBtn.addEventListener('click', () => handleNoticeEdit(item));
+
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.type = 'button';
+                        deleteBtn.className = 'btn btn-sm btn-outline-danger';
+                        deleteBtn.textContent = '삭제';
+                        deleteBtn.addEventListener('click', () => handleNoticeDelete(item));
+
+                        actionWrap.appendChild(editBtn);
+                        actionWrap.appendChild(deleteBtn);
+                        li.appendChild(actionWrap);
+                    }
+
+                    adminNoticeList.appendChild(li);
+                });
+            }
+
+            async function handleNoticeEdit(item) {
+                if (!state.session.isAdmin) {
+                    adminNoticeMessage.textContent = '관리자만 공지사항을 수정할 수 있습니다.';
+                    return;
+                }
+
+                const newTitle = window.prompt('새 공지 제목을 입력하세요.', item.title);
+                if (newTitle === null) return;
+                const newContent = window.prompt('새 공지 내용을 입력하세요.', item.content);
+                if (newContent === null) return;
+
+                const title = newTitle.trim();
+                const content = newContent.trim();
+                if (!title || !content) {
+                    adminNoticeMessage.textContent = '제목과 내용을 모두 입력하세요.';
+                    return;
+                }
+
+                try {
+                    adminNoticeMessage.textContent = '공지사항을 수정하는 중입니다...';
+                    const response = await fetch(`/api/admin/notices/${item.notice_id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ title, content })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '공지사항 수정에 실패했습니다.');
+                    adminNoticeMessage.textContent = data.message;
+                    await loadAdminNotices();
+                } catch (error) {
+                    console.error(error);
+                    adminNoticeMessage.textContent = error.message || '공지사항 수정 중 오류가 발생했습니다.';
+                }
+            }
+
+            async function handleNoticeDelete(item) {
+                if (!state.session.isAdmin) {
+                    adminNoticeMessage.textContent = '관리자만 공지사항을 삭제할 수 있습니다.';
+                    return;
+                }
+
+                const confirmed = window.confirm('선택한 공지사항을 삭제하시겠습니까?');
+                if (!confirmed) return;
+
+                try {
+                    adminNoticeMessage.textContent = '공지사항을 삭제하는 중입니다...';
+                    const response = await fetch(`/api/admin/notices/${item.notice_id}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '공지사항 삭제에 실패했습니다.');
+                    adminNoticeMessage.textContent = data.message;
+                    await loadAdminNotices();
+                } catch (error) {
+                    console.error(error);
+                    adminNoticeMessage.textContent = error.message || '공지사항 삭제 중 오류가 발생했습니다.';
+                }
+            }
+
+            async function loadOrgDashboardList() {
+                if (!orgDashboardList) return;
+                orgDashboardList.innerHTML = '<div class="list-group-item text-muted">등록된 기업을 불러오는 중입니다...</div>';
+                try {
+                    const response = await fetch('/api/org/dashboard/organizations');
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '기업 목록을 불러오지 못했습니다.');
+                    state.orgDashboard.list = Array.isArray(data.items) ? data.items : [];
+                    renderOrgDashboardList();
+                } catch (error) {
+                    console.error(error);
+                    orgDashboardList.innerHTML = `<div class="list-group-item text-danger">${error.message || '기업 목록을 불러오지 못했습니다.'}</div>`;
+                }
+            }
+
+            function renderOrgDashboardList() {
+                if (!orgDashboardList) return;
+                orgDashboardList.innerHTML = '';
+                if (!state.orgDashboard.list.length) {
+                    orgDashboardList.innerHTML = '<div class="list-group-item text-muted">등록된 기업이 없습니다.</div>';
+                    return;
+                }
+
+                state.orgDashboard.list.forEach((org) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'list-group-item list-group-item-action';
+                    if (state.orgDashboard.selectedOrgId === org.org_id) button.classList.add('active');
+                    button.textContent = org.org_name;
+                    button.addEventListener('click', () => {
+                        if (state.orgDashboard.selectedOrgId === org.org_id) return;
+                        state.orgDashboard.selectedOrgId = org.org_id;
+                        state.orgDashboard.detail = null;
+                        renderOrgDashboardList();
+                        clearOrgDashboardFormValues();
+                        fetchOrgDashboardDetail(org.org_id);
+                    });
+                    orgDashboardList.appendChild(button);
+                });
+            }
+
+            async function fetchOrgDashboardDetail(orgId) {
+                if (!orgDashboardDetailMessage || !orgDashboardDetailFields) return;
+                orgDashboardDetailMessage.textContent = '상세 정보를 불러오는 중입니다...';
+                orgDashboardDetailFields.innerHTML = '';
+                updateOrgDashboardFormState();
+
+                try {
+                    const response = await fetch(`/api/org/dashboard/organizations/${orgId}`);
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '기업 상세 정보를 불러오지 못했습니다.');
+                    state.orgDashboard.detail = data;
+                    renderOrgDashboardDetail();
+                    updateOrgDashboardFormState();
+                } catch (error) {
+                    console.error(error);
+                    orgDashboardDetailMessage.textContent = error.message || '기업 상세 정보를 불러오지 못했습니다.';
+                    state.orgDashboard.detail = null;
+                    updateOrgDashboardFormState();
+                }
+            }
+
+            function renderOrgDashboardDetail() {
+                if (!orgDashboardDetailMessage || !orgDashboardDetailFields) return;
+
+                if (!state.orgDashboard.selectedOrgId) {
+                    orgDashboardDetailMessage.textContent = '기업을 선택하면 상세 정보가 표시됩니다.';
+                    orgDashboardDetailFields.innerHTML = '';
+                    clearOrgDashboardFormValues();
+                    return;
+                }
+
+                if (!state.orgDashboard.detail) {
+                    orgDashboardDetailMessage.textContent = '상세 정보를 불러오는 중입니다...';
+                    orgDashboardDetailFields.innerHTML = '';
+                    return;
+                }
+
+                const { org, dashboard } = state.orgDashboard.detail;
+                const fieldHtml = orgDashboardFieldConfigs.map(({ key, label }) => {
+                    const value = dashboard[key] || '입력되지 않았습니다.';
+                    return `<div class="mb-2"><strong>${label}</strong>: ${value}</div>`;
+                }).join('');
+
+                const updatedText = dashboard.updated_at
+                    ? `마지막 수정: ${new Date(dashboard.updated_at).toLocaleString('ko-KR')}`
+                    : '아직 수정 기록이 없습니다.';
+                const websiteHtml = org.website ? `<div class="small text-muted">${org.website}</div>` : '';
+
+                orgDashboardDetailMessage.textContent = '';
+                orgDashboardDetailFields.innerHTML = `
+                    <div class="mb-2">
+                        <div class="fw-semibold">${org.org_name}</div>
+                        ${websiteHtml}
+                    </div>
+                    ${fieldHtml}
+                    <div class="text-muted small mt-2">${updatedText}</div>
+                `;
+
+                fillOrgDashboardForm(dashboard);
+            }
+
+            function fillOrgDashboardForm(dashboard = {}) {
+                orgDashboardFieldConfigs.forEach(({ key }) => {
+                    if (orgDashboardInputs[key]) orgDashboardInputs[key].value = dashboard[key] || '';
+                });
+            }
+
+            function updateOrgDashboardFormState() {
+                if (!orgDashboardFormFieldset || !orgDashboardFormMessage) return;
+
+                if (!state.orgDashboard.selectedOrgId) {
+                    orgDashboardFormFieldset.disabled = true;
+                    orgDashboardFormMessage.textContent = '기업을 선택하면 수정 폼이 활성화됩니다.';
+                    return;
+                }
+
+                if (canEditSelectedOrg()) {
+                    orgDashboardFormFieldset.disabled = false;
+                    orgDashboardFormMessage.textContent = '입력 후 저장 버튼을 눌러주세요. (각 항목 255자 제한)';
+                } else {
+                    orgDashboardFormFieldset.disabled = true;
+                    orgDashboardFormMessage.textContent = '본인 기업 계정으로 로그인해야 수정할 수 있습니다.';
+                }
+            }
+
+            function getOrgDashboardPayloadFromForm() {
+                const payload = {};
+                orgDashboardFieldConfigs.forEach(({ key }) => {
+                    payload[key] = orgDashboardInputs[key] ? orgDashboardInputs[key].value.trim() : '';
+                });
+                return payload;
+            }
+
+            function updateTeamPlayAccessUI() {
+                if (!teamForm || !teamFormMessage) return;
+                const enabled = canUseTeamPlay();
+                teamNameInput.disabled = !enabled;
+                teamIntroInput.disabled = !enabled;
+                teamFormSubmitButton.disabled = !enabled;
+                teamFormResetButton.disabled = !enabled;
+
+                if (!enabled) {
+                    teamFormMessage.textContent = '일반 회원(actor_type=USER)만 팀을 생성/관리할 수 있습니다.';
+                    return;
+                }
+
+                if (state.teamPlay.editingTeamId) {
+                    teamFormMessage.textContent = '팀 정보를 수정한 뒤 저장하세요.';
+                    teamFormSubmitButton.textContent = '팀 정보 수정';
+                    teamFormResetButton.classList.remove('disabled');
+                } else {
+                    teamFormMessage.textContent = '팀명을 입력하고 생성 버튼을 눌러주세요.';
+                    teamFormSubmitButton.textContent = '팀 생성';
+                }
+            }
+
+            function setTeamFormMode(teamId) {
+                state.teamPlay.editingTeamId = teamId || null;
+                if (teamId) {
+                    const target = state.teamPlay.teams.find((team) => team.team_id === teamId);
+                    if (target) {
+                        teamNameInput.value = target.team_name || '';
+                        teamIntroInput.value = target.introduction || '';
+                    }
+                    teamFormResetButton.classList.remove('d-none');
+                } else {
+                    resetTeamFormFields();
+                    teamFormResetButton.classList.add('d-none');
+                }
+                updateTeamPlayAccessUI();
+            }
+
+            function renderTeamList() {
+                if (!teamListEl) return;
+                teamListEl.innerHTML = '';
+                if (!state.teamPlay.teams.length) {
+                    teamListEl.textContent = '등록된 팀이 없습니다.';
+                    return;
+                }
+
+                state.teamPlay.teams.forEach((team, idx) => {
+                    const item = document.createElement('div');
+                    item.style.padding = '6px 0';
+                    if (idx !== state.teamPlay.teams.length - 1) {
+                        item.style.borderBottom = '1px solid #f0f0f0';
+                    }
+                    if (state.teamPlay.selectedTeamId === team.team_id) {
+                        item.style.fontWeight = '600';
+                    }
+
+                    const titleEl = document.createElement('div');
+                    titleEl.textContent = `${team.team_name} (구성원 ${team.member_count || 0}명${team.is_owner ? ' · 내가 만든 팀' : team.is_member ? ' · 참가 중' : ''})`;
+
+                    const introEl = document.createElement('div');
+                    introEl.textContent = team.introduction || '팀 소개가 아직 없습니다.';
+
+                    const actionWrap = document.createElement('div');
+                    actionWrap.style.marginTop = '4px';
+
+                    const detailBtn = document.createElement('button');
+                    detailBtn.type = 'button';
+                    detailBtn.textContent = '상세';
+                    detailBtn.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        selectTeam(team.team_id);
+                    });
+                    actionWrap.appendChild(detailBtn);
+
+                    if (!team.is_owner && !team.is_member) {
+                        const joinBtn = document.createElement('button');
+                        joinBtn.type = 'button';
+                        joinBtn.textContent = '참가';
+                        joinBtn.disabled = !canUseTeamPlay();
+                        joinBtn.style.marginLeft = '4px';
+                        joinBtn.addEventListener('click', async (event) => {
+                            event.stopPropagation();
+                            await handleTeamJoin(team.team_id);
+                        });
+                        actionWrap.appendChild(joinBtn);
+                    }
+
+                    if (team.is_owner) {
+                        const editBtn = document.createElement('button');
+                        editBtn.type = 'button';
+                        editBtn.textContent = '편집';
+                        editBtn.style.marginLeft = '4px';
+                        editBtn.addEventListener('click', (event) => {
+                            event.stopPropagation();
+                            setTeamFormMode(team.team_id);
+                        });
+
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.type = 'button';
+                        deleteBtn.textContent = '삭제';
+                        deleteBtn.style.marginLeft = '4px';
+                        deleteBtn.addEventListener('click', async (event) => {
+                            event.stopPropagation();
+                            await handleTeamDelete(team.team_id);
+                        });
+                        actionWrap.appendChild(editBtn);
+                        actionWrap.appendChild(deleteBtn);
+                    }
+
+                    item.appendChild(titleEl);
+                    item.appendChild(introEl);
+                    item.appendChild(actionWrap);
+                    item.addEventListener('click', () => selectTeam(team.team_id));
+
+                    teamListEl.appendChild(item);
+                });
+            }
+
+            function renderTeamDetail() {
+                if (!teamDetailMessage || !teamDetailContent) return;
+
+                if (!state.teamPlay.selectedTeamId) {
+                    teamDetailMessage.textContent = '팀을 선택하면 상세 정보가 표시됩니다.';
+                    teamDetailContent.innerHTML = '';
+                    teamMemberList.innerHTML = '';
+                    return;
+                }
+
+                if (!state.teamPlay.detail) {
+                    teamDetailMessage.textContent = '상세 정보를 불러오는 중입니다...';
+                    teamDetailContent.innerHTML = '';
+                    teamMemberList.innerHTML = '';
+                    return;
+                }
+
+                const { team, members } = state.teamPlay.detail;
+                teamDetailMessage.textContent = '';
+
+                const joinButton = (!team.is_owner && !team.is_member && canUseTeamPlay())
+                    ? `<button id="teamDetailJoinButton">팀 참가</button>`
+                    : '';
+
+                teamDetailContent.innerHTML = `
+                    <div>
+                        <div class="fw-semibold">${team.team_name}</div>
+                        <div class="small text-muted">구성원 ${team.member_count || 0}명</div>
+                    </div>
+                    <div class="mt-2">${team.introduction || '팀 소개가 없습니다.'}</div>
+                    <div class="mt-2">${joinButton}</div>
+                `;
+
+                if (joinButton) {
+                    const detailJoinBtn = document.getElementById('teamDetailJoinButton');
+                    if (detailJoinBtn) {
+                        detailJoinBtn.addEventListener('click', async () => {
+                            await handleTeamJoin(team.team_id);
+                        });
+                    }
+                }
+
+                if (Array.isArray(members) && members.length) {
+                    const items = members.map((member) => {
+                        const name = member.username || member.email || `actor#${member.actor_id}`;
+                        const role = member.role === 'OWNER' ? '팀장' : member.role === 'ADMIN' ? '관리자' : '구성원';
+                        const joined = member.joined_at ? new Date(member.joined_at).toLocaleString('ko-KR') : '';
+                        return `<div>${name} (${role}) · ${joined}</div>`;
+                    }).join('');
+                    teamMemberList.innerHTML = `<h6 class="mt-2">멤버</h6>${items}`;
+                } else {
+                    teamMemberList.innerHTML = '<div class="small text-muted">등록된 멤버가 없습니다.</div>';
+                }
+            }
+
+            async function loadTeamList() {
+                if (!teamListEl) return;
+                state.teamPlay.loading = true;
+                teamListEl.textContent = '팀 목록을 불러오는 중입니다...';
+                try {
+                    const response = await fetch('/api/team-play/teams');
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '팀 목록을 불러오지 못했습니다.');
+                    state.teamPlay.teams = Array.isArray(data.items) ? data.items : [];
+                    renderTeamList();
+                } catch (error) {
+                    console.error(error);
+                    teamListEl.textContent = error.message;
+                } finally {
+                    state.teamPlay.loading = false;
+                }
+            }
+
+            function selectTeam(teamId) {
+                if (state.teamPlay.selectedTeamId === teamId) return;
+                state.teamPlay.selectedTeamId = teamId;
+                state.teamPlay.detail = null;
+                renderTeamList();
+                renderTeamDetail();
+                if (teamId) {
+                    fetchTeamDetail(teamId);
+                }
+            }
+
+            async function fetchTeamDetail(teamId) {
+                if (!teamId) return;
+                teamDetailMessage.textContent = '상세 정보를 불러오는 중입니다...';
+                teamDetailContent.innerHTML = '';
+                teamMemberList.innerHTML = '';
+                try {
+                    const response = await fetch(`/api/team-play/teams/${teamId}`);
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '팀 상세 정보를 불러오지 못했습니다.');
+                    state.teamPlay.detail = data;
+                    renderTeamDetail();
+                } catch (error) {
+                    console.error(error);
+                    teamDetailMessage.textContent = error.message;
+                }
+            }
+
+            async function handleTeamJoin(teamId) {
+                if (!canUseTeamPlay()) {
+                    teamDetailMessage.textContent = '일반 회원만 팀에 참가할 수 있습니다.';
+                    return;
+                }
+                try {
+                    const response = await fetch(`/api/team-play/teams/${teamId}/join`, { method: 'POST' });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '팀 참가에 실패했습니다.');
+                    teamDetailMessage.textContent = data.message;
+                    await loadTeamList();
+                    if (state.teamPlay.selectedTeamId === teamId) {
+                        await fetchTeamDetail(teamId);
+                    }
+                } catch (error) {
+                    console.error(error);
+                    teamDetailMessage.textContent = error.message;
+                }
+            }
+
+            async function handleTeamDelete(teamId) {
+                const confirmed = window.confirm('해당 팀을 삭제하시겠습니까?');
+                if (!confirmed) return;
+                try {
+                    const response = await fetch(`/api/team-play/teams/${teamId}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.message || '팀 삭제에 실패했습니다.');
+                    teamDetailMessage.textContent = data.message;
+                    if (state.teamPlay.selectedTeamId === teamId) {
+                        state.teamPlay.selectedTeamId = null;
+                        state.teamPlay.detail = null;
+                        renderTeamDetail();
+                    }
+                    if (state.teamPlay.editingTeamId === teamId) {
+                        setTeamFormMode(null);
+                    }
+                    await loadTeamList();
+                } catch (error) {
+                    console.error(error);
+                    teamDetailMessage.textContent = error.message;
+                }
+            }
+
+            if (orgDashboardForm) {
+                orgDashboardForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    if (!state.orgDashboard.selectedOrgId) {
+                        orgDashboardFormMessage.textContent = '기업을 먼저 선택하세요.';
+                        return;
+                    }
+                    if (!canEditSelectedOrg()) {
+                        orgDashboardFormMessage.textContent = '본인 기업만 수정할 수 있습니다.';
+                        return;
+                    }
+
+                    const payload = getOrgDashboardPayloadFromForm();
+                    orgDashboardFormMessage.textContent = '기업 대시보드 정보를 저장하는 중입니다...';
+
+                    try {
+                        const response = await fetch(`/api/org/dashboard/organizations/${state.orgDashboard.selectedOrgId}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data?.message || '저장에 실패했습니다.');
+                        orgDashboardFormMessage.textContent = data.message || '저장되었습니다.';
+                        if (state.orgDashboard.detail && data.dashboard) {
+                            state.orgDashboard.detail.dashboard = data.dashboard;
+                            renderOrgDashboardDetail();
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        orgDashboardFormMessage.textContent = error.message || '저장 중 오류가 발생했습니다.';
+                    }
+                });
+            }
+
+            if (teamForm) {
+                teamForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    if (!canUseTeamPlay()) {
+                        teamFormMessage.textContent = '일반 회원만 팀을 생성/관리할 수 있습니다.';
+                        return;
+                    }
+
+                    const payload = {
+                        team_name: teamNameInput.value.trim(),
+                        introduction: teamIntroInput.value.trim()
+                    };
+
+                    if (!payload.team_name) {
+                        teamFormMessage.textContent = '팀명을 입력하세요.';
+                        return;
+                    }
+
+                    const editingId = state.teamPlay.editingTeamId;
+                    const method = editingId ? 'PUT' : 'POST';
+                    const url = editingId ? `/api/team-play/teams/${editingId}` : '/api/team-play/teams';
+                    teamFormMessage.textContent = editingId ? '팀을 수정하는 중입니다...' : '팀을 생성하는 중입니다...';
+
+                    try {
+                        const response = await fetch(url, {
+                            method,
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data?.message || '요청에 실패했습니다.');
+
+                        teamFormMessage.textContent = data.message;
+                        if (!editingId && data.team) {
+                            state.teamPlay.selectedTeamId = data.team.team_id;
+                        }
+                        setTeamFormMode(null);
+                        await loadTeamList();
+                        if (state.teamPlay.selectedTeamId) {
+                            await fetchTeamDetail(state.teamPlay.selectedTeamId);
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        teamFormMessage.textContent = error.message || '팀 저장 중 오류가 발생했습니다.';
+                    }
+                });
+            }
+
+            if (teamFormResetButton) {
+                teamFormResetButton.addEventListener('click', () => setTeamFormMode(null));
+            }
+
+            if (teamListReloadButton) {
+                teamListReloadButton.addEventListener('click', loadTeamList);
+            }
+
+            if (bugBountyForm && bugBountyResult) {
+                bugBountyForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    bugBountyResult.textContent = '등록 중입니다...';
+
+                    const payload = {
+                        program_name: document.getElementById('programName').value.trim(),
+                        program_description: document.getElementById('programDescription').value.trim()
+                    };
+
+                    try {
+                        const response = await fetch('/api/org/bug-bounty/programs', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data?.message || '등록에 실패했습니다.');
+
+                        const createdAt = data?.program?.created_at
+                            ? new Date(data.program.created_at).toLocaleString('ko-KR')
+                            : '등록 시간 확인 불가';
+
+                        bugBountyResult.innerHTML = `
+                            <div class="text-success fw-semibold mb-1">${data.message}</div>
+                            <div>프로그램명 : ${data.program.program_name}</div>
+                            <div>등록 내용 : ${data.program.program_description}</div>
+                            <div>등록 시간 : ${createdAt}</div>
+                        `;
+                        bugBountyForm.reset();
+                    } catch (error) {
+                        console.error(error);
+                        bugBountyResult.textContent = error.message || '네트워크 오류가 발생했습니다.';
+                    }
+                });
+            }
+
+            if (searchForm && searchInput && searchResultEl) {
+                searchForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    const keyword = searchInput.value.trim();
+                    if (!keyword) {
+                        searchResultEl.textContent = '검색어를 입력하세요.';
+                        return;
+                    }
+
+                    searchResultEl.textContent = '검색 중입니다...';
+                    try {
+                        const response = await fetch(`/api/org/bug-bounty/programs/search?q=${encodeURIComponent(keyword)}`);
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data?.message || '검색에 실패했습니다.');
+
+                        if (!data.items || data.items.length === 0) {
+                            searchResultEl.textContent = '검색 결과가 없습니다.';
+                            return;
+                        }
+
+                        const listItems = data.items.map((item) => {
+                            const createdAt = item.created_at
+                                ? new Date(item.created_at).toLocaleString('ko-KR')
+                                : '등록 시간 확인 불가';
+                            return `
+                                <li class="list-group-item">
+                                    <div class="fw-semibold">${item.program_name}</div>
+                                    <div>${item.program_description}</div>
+                                    <div class="text-muted">등록 시간: ${createdAt}</div>
+                                </li>
+                            `;
+                        }).join('');
+
+                        searchResultEl.innerHTML = `
+                            <div class="text-success mb-2">총 ${data.total}건</div>
+                            <ul class="list-group">${listItems}</ul>
+                        `;
+                    } catch (error) {
+                        console.error(error);
+                        searchResultEl.textContent = error.message || '네트워크 오류가 발생했습니다.';
+                    }
+                });
+            }
+
+            if (adminNoticeForm && adminNoticeTitle && adminNoticeContent) {
+                adminNoticeForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    if (!state.session.isAdmin) {
+                        adminNoticeMessage.textContent = '관리자 계정으로 로그인하세요.';
+                        return;
+                    }
+
+                    const payload = {
+                        title: adminNoticeTitle.value.trim(),
+                        content: adminNoticeContent.value.trim()
+                    };
+
+                    if (!payload.title || !payload.content) {
+                        adminNoticeMessage.textContent = '제목과 내용을 모두 입력하세요.';
+                        return;
+                    }
+
+                    try {
+                        adminNoticeMessage.textContent = '공지사항을 등록하는 중입니다...';
+                        const response = await fetch('/api/admin/notices', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data?.message || '공지사항 등록에 실패했습니다.');
+
+                        adminNoticeMessage.textContent = data.message;
+                        adminNoticeForm.reset();
+                        await loadAdminNotices();
+                    } catch (error) {
+                        console.error(error);
+                        adminNoticeMessage.textContent = error.message || '공지사항 등록 중 오류가 발생했습니다.';
+                    }
+                });
+            }
+
+            setTeamFormMode(null);
+            refreshSessionStatus();
+            loadOrgDashboardList();
+            loadTeamList();
+        })();
+    </script>
 </body>
 
 </html>

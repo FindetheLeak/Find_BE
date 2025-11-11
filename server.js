@@ -8,10 +8,8 @@ const cors = require('cors');
 // 설정 파일 로드
 require('./config/passport')(passport);
 const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const orgRoutes = require('./routes/org');
-const publicRoutes = require('./routes/public');
-const searchRoutes = require('./routes/search.js');
+const apiRoutes = require('./routes/api');
+const { isLoggedIn } = require('./middlewares/auth');
 const app = express();
 
 // CORS 설정
@@ -32,19 +30,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// 로그인 확인 미들웨어
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    // API 요청에 대해 401 Unauthenticated 응답
-    if (req.path.startsWith('/api')) {
-        return res.status(401).json({ message: '로그인이 필요합니다.' });
-    }
-    // 그 외에는 로그인 페이지로 리디렉션
-    res.redirect('/');
-}
-
 // 정적 파일 및 뷰 라우트
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -58,11 +43,8 @@ app.get('/profile', isLoggedIn, (req, res) => {
 });
 
 // 분리된 라우터 마운트
-app.use('/api', publicRoutes);
-app.use('/api', searchRoutes);
 app.use('/auth', authRoutes);
-app.use('/api/user', isLoggedIn, userRoutes); // /api/user 경로의 모든 라우트에 로그인 확인 적용
-app.use('/api/org',  isLoggedIn, orgRoutes);
+app.use('/api', apiRoutes);
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
