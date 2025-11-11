@@ -12,7 +12,14 @@ const router = express.Router();
 // 역할 세팅 
 function setRole(role) {
   return (req, res, next) => {
+    if (!req.session) return next();
     req.session.desiredRole = role; // 'USER' | 'ORG' | 'ADMIN'
+    if (typeof req.session.save === 'function') {
+      return req.session.save(err => {
+        if (err) return next(err);
+        next();
+      });
+    }
     next();
   };
 }
@@ -26,6 +33,9 @@ function handleAuthCallback(provider) {
 
       req.logIn(principal, (err) => {
         if (err) return next(err);
+        if (req.session) {
+          delete req.session.desiredRole;
+        }
 
         // 역할별 온보딩/리다이렉트
         if (info && info.newActor) {
